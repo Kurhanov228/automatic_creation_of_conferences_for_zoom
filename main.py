@@ -36,13 +36,12 @@ meeting_details = {
                                "auto_recording": "cloud"
                                }
 }
-url_start_confa = f'https://api.zoom.us/v2/users/me/meetings'
-response = requests.post(url_start_confa, headers=headers, data=json.dumps(meeting_details))
+conference_start_url = f'https://api.zoom.us/v2/users/me/meetings'
+response = requests.post(conference_start_url, headers=headers, data=json.dumps(meeting_details))
 response.raise_for_status()
 
 print(response.json()["password"], response.json()["join_url"])
-email_send = ["xuxlaevoleg@yandex.ru", "ezabid@yandex.ru"]
-for email in email_send:
-    slova = f" Вы риглашены на конференцию зум.Вот ссылка {response.json()['join_url']} Пароль {response.json()['password']}"
-    send("gogikorotkov@yandex.ru", email_send, slova, "Dmitri77")
-print(slova)
+emails_to_send = ["xuxlaevoleg@yandex.ru", "ezabid@yandex.ru"]
+for email in emails_to_send:
+    text = f" Вы риглашены на конференцию зум.Вот ссылка {response.json()['join_url']} Пароль {response.json()['password']}"
+    send("gogikorotkov@yandex.ru", emails_to_send, text, "Dmitri77")
